@@ -1,43 +1,58 @@
-import { Image, Pressable, Text, View } from 'react-native';
+import { Image, Pressable, Text, View, Button } from 'react-native';
+import { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from './styles';
-import { useState } from 'react';
-
 
 export default function Home() {
-    function iniciarAplicacao() {
-        console.log("O botão foi pressionado!")
+    const [contador, setContador] = useState(0)
+    const [iniciado, setIniciado] = useState(false)
+
+    useEffect(() => {
+        console.log("Contador alterado:", contador);
+    }, [contador]);
+    
+    useEffect(() => {
+        setTimeout(()=>{
+            setIniciado(true)
+        },2000);
+    }, []);
+
+
+    function incrementar() {
+        setContador(contador + 1)
     }
+
+    function decrementar() {
+        if (contador > 0) {
+            setContador(contador - 1)
+        }
+    }
+
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.container}>
-                <View style={styles.card}>
-                    <Image
-                        source={require("../assets/images/logo.png")}
-                        style={styles.logo}
-                        resizeMode='contain'
+
+                {iniciado ? (
+                    <View style={styles.card}>
+                    <Text>CONTADOR</Text>
+                    <Text style={{ fontSize: 25 }}>{contador}</Text>
+
+                    <Button
+                        title='+'
+                        onPress={incrementar}
                     />
-                    <Text style={styles.titulo}>TaskFlow</Text>
-
-                    <Text style={styles.descricao}>
-                        Organize sua tarefas de forma simples
-                    </Text>
-
-                    <Pressable
-                        onPress={iniciarAplicacao}
-                        style={({ pressed }) => [styles.botao,
-                        pressed && styles.botaoPressionado
-                        ]}
-                    >
-
-                        {({ pressed }) => (
-                            <Text style={styles.textoBotao}>
-                                {pressed ? "Carregando" : "Iniciar"}
-                            </Text>
-                        )}
-
-                    </Pressable>
+                    <Button
+                        title='----'
+                        onPress={decrementar}
+                    />
                 </View>
+                ) : (
+                    <View style={styles.card}>
+                    <Text>Carregando Dados</Text>
+            
+                </View>
+                )}
+                
             </View>
         </SafeAreaView>
     );
