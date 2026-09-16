@@ -1,6 +1,7 @@
 import { Text, View, Button } from "react-native";
 import { styles } from "./styles";
 import { router } from "expo-router";
+import Botao from "@/components/Botao";
 
 
 export default function Tarefas() {
@@ -12,9 +13,18 @@ export default function Tarefas() {
     return (
         <View style={styles.container}>
             <Text style={styles.titulo}>Tela de Tarefas</Text>
-            <Button title="Configurações" onPress={() => router.push('/configuracoes')} />
-            <Button title="Voltar" onPress={router.back} />
-            <Button title="Voltar ao Início" onPress={voltarInicio} />    
+            <Botao 
+                texto="Voltar" 
+                onPress={router.back}
+            />
+            <Botao 
+                texto="Configurações" 
+                onPress={() => router.push('/configuracoes')}
+                cor="#f22" 
+            />
+            <Botao 
+                texto="Voltar ao Início" 
+                onPress={voltarInicio} />    
         </View>
     )
 }
