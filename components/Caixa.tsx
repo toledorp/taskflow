@@ -1,7 +1,12 @@
+import React, { Children } from "react";
 import { StyleSheet, View } from "react-native";
 
+interface CaixaProps{
+    children: React.ReactNode
+}
 
-export default function Caixa({children}:any){
+export default function Caixa({children}:CaixaProps){
+
     return(
         <View style={styles.caixa}>
             {children}
@@ -11,7 +16,7 @@ export default function Caixa({children}:any){
 
 const styles = StyleSheet.create({
     caixa:{
-        backgroundColor: "#ffcacaff",
+        backgroundColor: '#ffcacaff',
         width: 200,
         height: 300
     }

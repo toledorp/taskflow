@@ -1,41 +1,38 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 
-interface BotaoProps{
+interface BotaoProps {
     texto: string
     onPress: () => void
     cor?: string
 }
 
-export default function Botao({texto, onPress, cor = "#2563EB" }:BotaoProps){
-    return(
-        <Pressable 
+export default function Botao({ texto, onPress, cor = '#2563EB' }: BotaoProps) {
+    return (
+        <Pressable
             style={({ pressed }) => [
                 styles.botao,
                 pressed && styles.botaoPressionado,
-                {backgroundColor:cor}
+                {backgroundColor: cor}
             ]}
-            onPress={onPress} 
+            onPress={onPress}
         >
             <Text style={styles.texto}>{texto}</Text>
         </Pressable>
     )
-}     
-
+}
 
 const styles = StyleSheet.create({
-    botao:{
+    botao: {
         paddingVertical: 15,
         paddingHorizontal: 40,
         borderRadius: 10
     },
-    texto:{
-        color: "#fff",
+    texto: {
+        color: '#FFF',
         fontSize: 18,
-        fontWeight: "bold"
+        fontWeight: 'bold'
     },
-    botaoPressionado:{
-        opacity: 1.9
+    botaoPressionado: {
+        opacity: 0.8
     }
-
 })
-

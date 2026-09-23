@@ -1,9 +1,14 @@
+import React, { Children } from "react";
 import { StyleSheet, View } from "react-native";
 
+interface CardProps{
+    children: React.ReactNode
+}
 
-export default function Caixa({children}:any){
+export default function Card({children}:CardProps){
+
     return(
-        <View style={styles.caixa}>
+        <View style={styles.card}>
             {children}
         </View>
     )
@@ -15,5 +20,5 @@ const styles = StyleSheet.create({
         padding: 30,
         borderRadius: 20,
         alignItems: 'center'
-    }
+    },
 })

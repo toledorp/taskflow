@@ -1,13 +1,14 @@
-import { StyleSheet, Text } from "react-native";
+import { Text, StyleSheet } from "react-native";
 
-interface TituloProps {
-  texto: string
+interface TituloProps{
+    texto: string
 }
 
-export default function Titulo({ texto }: TituloProps) {
-  return (
-  <Text style={styles.titulo}>{texto}</Text>
-  )
+export default function Titulo({texto} : TituloProps){
+
+    return(
+        <Text style={styles.titulo}>{texto}</Text>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -17,4 +18,4 @@ const styles = StyleSheet.create({
         color: '#2c61b6ff',
         marginBottom: 10
     },
-});
+})

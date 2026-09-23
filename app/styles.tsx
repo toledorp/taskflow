@@ -41,15 +41,6 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 40,
         borderRadius: 10
     },
-    textoBotao:{
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 18
-    },
-    botaoPressionado:{
-        opacity: 0.7,
-        backgroundColor: '#e71212ff',
-        transform: [{scale: 1.5}]
-    },
 
 });
+
