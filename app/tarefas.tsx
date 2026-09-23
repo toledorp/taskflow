@@ -1,7 +1,7 @@
 import Botao from "@/components/Botao";
 import TarefaCard from "@/components/TarefaCard";
 import { router } from "expo-router";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, SectionList, Text, View } from "react-native";
 import { styles } from "./styles";
 
 const tarefas = [
@@ -25,6 +25,32 @@ const tarefas = [
   },
 ];
 
+const tarefas2 = [
+  {
+    title: "Pendentes",
+    data: [
+      "Estudar React native", "Entregar tarefa de PDW"
+    ]
+  },
+    {
+    title: "Concluidas",
+    data: [
+      "Entregar tarefa de Estatistica"
+    ]
+  },
+]
+
+const secoes = [
+  {
+    title: "Pendentes",
+    data: tarefas.filter(tarefas => !tarefas.concluida)
+  },
+    {
+    title: "Concluidas",
+    data: tarefas.filter(tarefas => tarefas.concluida)
+  },
+]
+
 export default function Tarefas() {
   function voltarInicio() {
     router.dismissAll();
@@ -35,7 +61,7 @@ export default function Tarefas() {
     <View style={styles.container}>
       <Text style={styles.titulo}>Minhas Tarefas</Text>
 
-      <FlatList
+      {/* <FlatList
         data={tarefas}
         contentContainerStyle={{ padding: 25 }}
         keyExtractor={(item) => item.id}
@@ -52,6 +78,26 @@ export default function Tarefas() {
           ) : null
         }
         ListEmptyComponent={<Text>Nenhuma tarefa na lista</Text>}
+      /> */}
+
+      <SectionList 
+          sections={secoes}
+          keyExtractor={(item) => item.id}
+          renderItem={({item})=> (
+              <TarefaCard
+                    titulo={item.titulo}
+                    descricao=""
+                    prioridade={item.prioridade}
+              />
+          )}
+
+          renderSectionHeader={({section}) => (
+            <Text style={
+              {fontSize: 30,
+              fontWeight: 'bold'}
+          }>{section.title}</Text>
+          )}
+      
       />
 
       <Botao texto="Voltar" onPress={router.back} />
