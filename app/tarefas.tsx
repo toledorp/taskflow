@@ -6,19 +6,19 @@ import { styles } from "./styles";
 
 const tarefas = [
   {
-    id: 1,
+    id: "1",
     titulo: "Estudar React Native",
     concluida: false,
     prioridade: "Alta",
   },
   {
-    id: 2,
+    id: "2",
     titulo: "Entregar trabalho de Estatistica",
     concluida: false,
     prioridade: "Alta",
   },
   {
-    id: 3,
+    id: "3",
     titulo: "Concluir curso das Academys",
     concluida: true,
     prioridade: "Media",
