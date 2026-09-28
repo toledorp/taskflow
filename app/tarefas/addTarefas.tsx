@@ -1,0 +1,71 @@
+import Botao from "@/components/Botao";
+import { useState } from "react";
+import { View, Text, TextInput, StyleSheet, Alert } from "react-native";
+
+export default function AddTarefas() {
+    const [titulo, setTitulo] = useState("")
+    const [descricao, setDescricao] = useState("")
+
+    function salvar(){
+        if (titulo.trim() === ""){
+            Alert.alert("Atenção", "Digite o titulo da tarefa")
+            return;
+        }
+        if (descricao.trim() === ""){
+            Alert.alert("Atenção", "Digite a descrição da tarefa!")
+            return;
+        }
+
+        console.log("Validação ok, dados salvos com sucesso!")
+        setTitulo("")
+        setDescricao("")
+    }
+
+    return (
+        <View>
+            <View style={styles.container}>
+                <Text style={styles.label}>Título *</Text>
+                <TextInput
+                    value={titulo}
+                    style={styles.campo}
+                    onChangeText={(texto) => { setTitulo(texto) }}
+                    placeholder="Digite o título da tarefa"
+                />
+                <Text style={styles.label}>Descrição *</Text>
+                <TextInput
+                    value={descricao}
+                    style={styles.campo}
+                    onChangeText={(texto) => { setDescricao(texto) }}
+                    placeholder="Digite a descricao da tarefa"
+                    multiline
+                />
+
+                <View style={{alignSelf: 'flex-end'}}>
+                    <Botao
+                        texto="Salvar"
+                        onPress={salvar}
+                    />
+                </View>
+            </View>
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    campo: {
+        borderWidth: 1,
+        borderColor: '#999',
+        borderRadius: 8,
+        padding: 12,
+        marginBottom: 15
+    },
+    label: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 5
+    },
+    container:{
+        flex: 1,
+        padding: 20
+    }
+})

@@ -1,7 +1,7 @@
 import Botao from "@/components/Botao";
 import TarefaCard from "@/components/TarefaCard";
 import { router } from "expo-router";
-import { FlatList, SectionList, Text, View } from "react-native";
+import { SectionList, Text, View } from "react-native";
 import { styles } from "./styles";
 
 const tarefas = [
@@ -28,28 +28,24 @@ const tarefas = [
 const tarefas2 = [
   {
     title: "Pendentes",
-    data: [
-      "Estudar React native", "Entregar tarefa de PDW"
-    ]
+    data: ["Estudar React native", "Entregar tarefa de PDW"],
   },
-    {
+  {
     title: "Concluidas",
-    data: [
-      "Entregar tarefa de Estatistica"
-    ]
+    data: ["Entregar tarefa de Estatistica"],
   },
-]
+];
 
 const secoes = [
   {
     title: "Pendentes",
-    data: tarefas.filter(tarefas => !tarefas.concluida)
+    data: tarefas.filter((tarefas) => !tarefas.concluida),
   },
-    {
+  {
     title: "Concluidas",
-    data: tarefas.filter(tarefas => tarefas.concluida)
+    data: tarefas.filter((tarefas) => tarefas.concluida),
   },
-]
+];
 
 export default function Tarefas() {
   function voltarInicio() {
@@ -80,24 +76,22 @@ export default function Tarefas() {
         ListEmptyComponent={<Text>Nenhuma tarefa na lista</Text>}
       /> */}
 
-      <SectionList 
-          sections={secoes}
-          keyExtractor={(item) => item.id}
-          renderItem={({item})=> (
-              <TarefaCard
-                    titulo={item.titulo}
-                    descricao=""
-                    prioridade={item.prioridade}
-              />
-          )}
-
-          renderSectionHeader={({section}) => (
-            <Text style={
-              {fontSize: 30,
-              fontWeight: 'bold'}
-          }>{section.title}</Text>
-          )}
-      
+      <SectionList
+        sections={secoes}
+        contentContainerStyle={{ padding: 25 }}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TarefaCard
+            titulo={item.titulo}
+            descricao=""
+            prioridade={item.prioridade}
+          />
+        )}
+        renderSectionHeader={({ section }) => (
+          <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+            {section.title}
+          </Text>
+        )}
       />
 
       <Botao texto="Voltar" onPress={router.back} />
