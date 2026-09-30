@@ -1,7 +1,7 @@
 import { Image, Pressable, Text, View, Button } from 'react-native';
 import { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from './styles';
+import { styles } from '@/styles/global';
 
 export default function Home() {
     const [contador, setContador] = useState(0)

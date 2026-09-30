@@ -1,7 +1,7 @@
 import { Image, Pressable, Text, View, Button } from 'react-native';
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from './styles';
+import { styles } from '@/styles/global';
 import { router } from 'expo-router';
 import Botao from '@/components/Botao';
 import Titulo from '@/components/Titulo';
@@ -12,7 +12,7 @@ export default function Home() {
 
     function iniciarAplicacao() {
         setIniciado(true);
-        router.push("/tarefas");
+        router.push("/tarefas/tarefas");
     }
     return (
         <SafeAreaView style={styles.safeArea}>

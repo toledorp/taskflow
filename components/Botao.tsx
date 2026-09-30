@@ -23,8 +23,8 @@ export default function Botao({ texto, onPress, cor = '#2563EB' }: BotaoProps) {
 
 const styles = StyleSheet.create({
     botao: {
-        paddingVertical: 15,
-        paddingHorizontal: 40,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
         borderRadius: 10
     },
     texto: {
