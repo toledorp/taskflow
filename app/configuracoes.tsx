@@ -48,11 +48,6 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 15,
   },
-  selectItem: {
-    borderWidth: 1,
-    borderColor: "#999",
-    borderRadius: 8,
-  },
   label: {
     fontSize: 16,
     fontWeight: "bold",

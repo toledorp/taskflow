@@ -1,7 +1,7 @@
 import Botao from "@/components/Botao";
 import TarefaCard from "@/components/TarefaCard";
 import { styles } from "@/styles/global";
-import { carregarTarefas } from "@/util/armazenamento";
+import { carregarTarefas, carregarUsuario } from "@/util/armazenamento";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
@@ -13,19 +13,27 @@ type Tarefa = {
   prioridade: string;
 };
 
+type Usuario = {
+  username: string;
+}
+
 export default function Tarefas() {
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
+  const [usuario, setUsuario] = useState<Usuario | null>(null);
 
   useEffect(() => {
     async function carregar() {
       const dados = await carregarTarefas();
+      const user = await carregarUsuario();
       setTarefas(dados);
+      setUsuario(user); 
     }
     carregar();
   }, []);
 
   return (
     <View style={styles.container}>
+      <Text style={{ fontSize: 30}}>seja bem vindo, {usuario?.username || ""}</Text>
       <Text style={styles.titulo}>Minhas Tarefas</Text>
 
       <FlatList
