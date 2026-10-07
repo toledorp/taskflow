@@ -1,4 +1,4 @@
-import { Image, Pressable, Text, View, Button } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '@/styles/global';
@@ -41,8 +41,19 @@ export default function Home() {
                         texto={iniciado ? "Continuar" : "Começar"}
                         onPress={iniciarAplicacao}
                     />
-                    
+                    <View style={{ marginTop: 16 }}>
+                        <Botao
+                            texto="Atividade 13 - Axios"
+                            onPress={() => router.push("./atividades/aula_13")}
+                        />
+                    </View>
 
+                    <View style={{ marginTop: 16 }}>
+                        <Botao
+                            texto="Catálogo de produtos"
+                            onPress={() => router.push("./catalogo")}
+                        />
+                    </View>
                 </Card>
             </View>
         </SafeAreaView>
