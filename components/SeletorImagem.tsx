@@ -29,7 +29,7 @@ export default function SeletorImagem({
 
     async function selecionarImagem() {
         const resultado = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ['image'],
+            mediaTypes: ['images'],
             allowsEditing: permiteEdicao,
             aspect,
             quality: 0.8
