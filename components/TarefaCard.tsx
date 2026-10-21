@@ -6,15 +6,16 @@ interface TCProps {
   descricao: string;
   prioridade: string;
   concluida?: boolean;
-  excluirTarefa: () => void;
+  excluirTarefa?: () => void;
+  atualizarTarefa?: () => void;
 }
 
 export default function TarefaCard({
   titulo,
   descricao,
   prioridade,
-  concluida,
   excluirTarefa,
+  atualizarTarefa,
 }: TCProps) {
   return (
     <View
@@ -24,14 +25,18 @@ export default function TarefaCard({
         prioridade === "Media" && { borderLeftColor: "yellow" },
       ]}
     >
-      <Text style={styles.titulo}>{titulo}</Text>
-      <Text style={styles.descricao}>{descricao}</Text>
+      <Pressable
+        onPress={atualizarTarefa}
+      >
+        <Text style={styles.titulo}>{titulo}</Text>
+        <Text style={styles.descricao}>{descricao}</Text>
 
-      <View style={{ alignSelf: "flex-end" }}>
-        <Pressable onPress={excluirTarefa}>
-          <Ionicons name="trash-outline" size={22} color="red" />
-        </Pressable>
-      </View>
+        <View style={{ alignSelf: "flex-end" }}>
+          <Pressable onPress={excluirTarefa}>
+            <Ionicons name="trash-outline" size={22} color="red" />
+          </Pressable>
+        </View>
+      </Pressable>
     </View>
   );
 }

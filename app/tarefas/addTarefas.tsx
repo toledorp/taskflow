@@ -1,14 +1,35 @@
 import Botao from "@/components/Botao";
-import { router } from "expo-router";
-import { useState } from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
 import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { criarTarefa } from "@/services/tarefas";
+import { atualizarTarefas, buscarTarefas, criarTarefa } from "@/services/tarefas";
+import TarefaCard from "@/components/TarefaCard";
 
 export default function AddTarefas() {
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
   const [prioridade, setPrioridade] = useState("");
+
+  const {id} = useLocalSearchParams<{id?: string}>()
+
+  useEffect(()=>{
+    if (!id) return;
+
+    async function carregar() {
+      try {
+        const dados = await buscarTarefas(id)
+
+        setTitulo(dados.titulo)
+        setDescricao(dados.descricao)
+        setPrioridade(dados.prioridade)
+      } catch (error) {
+        console.log("Erro ao buscar a tarefa", error)
+      }
+    }
+    carregar()
+
+  },[id])
 
   async function salvar() {
     if (titulo.trim() === "") {
@@ -27,14 +48,25 @@ export default function AddTarefas() {
       concluida: false,
     };
 
-    await criarTarefa(novaTarefa);
+    if(!id) {
+      await criarTarefa(novaTarefa)
+    }else {
+      await atualizarTarefas(id, novaTarefa);
+    }
 
     Alert.alert("Sucesso!", "Validação ok, dados salvos com sucesso!");
     router.replace("/tarefas/tarefas");
   }
 
   return (
+
     <View style={styles.container}>
+      <TarefaCard 
+        titulo={titulo}
+        descricao={descricao}
+        prioridade={prioridade}
+      />
+      
       <Text style={styles.label}>Título *</Text>
       <TextInput
         value={titulo}
@@ -67,16 +99,6 @@ export default function AddTarefas() {
           <Picker.Item label="Alta" value="Alta" />
         </Picker>
       </View>
-
-      <TextInput
-        value={prioridade}
-        style={styles.campo}
-        onChangeText={(texto) => {
-          setPrioridade(texto);
-        }}
-        placeholder="Digite a descricao da tarefa"
-        multiline
-      />
 
       <View style={{ alignSelf: "flex-end" }}>
         <Botao texto="Salvar" onPress={salvar} />
