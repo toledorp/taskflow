@@ -2,7 +2,7 @@ import Botao from "@/components/Botao"
 import { criarTarefa, listarTarefas, Tarefa } from "@/services/tarefas_bd"
 import { useSQLiteContext } from "expo-sqlite"
 import { useEffect, useState } from "react"
-import { TextInput, View } from "react-native"
+import { FlatList, TextInput, View } from "react-native"
 
 export default function Home(){
     const db = useSQLiteContext()
@@ -60,8 +60,17 @@ export default function Home(){
                     texto="Salvar"
                     onPress={()=> void salvarTarefas()}
                 />
-
             </View>
+        
+        <FlatList 
+            style={styles.lista}
+            data={tarefas}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={({item}) => (
+                <Text>{item.titulo}</Text>
+            )}
+        
+        />
 
         </View>
     )
@@ -75,7 +84,7 @@ const styles = StyleSheet.create({
         paddinHorizontal: 20,
     },
     formulario:{
-        backgroudColor: #fff,
+        backgroudColor: "#fff",
         boderRadius: 12,
         padding: 14,
         marginBotton: 22
@@ -87,5 +96,9 @@ const styles = StyleSheet.create({
         padding: 12,
         marginBotton: 10,
         fontSize: 16
+    },
+    lista:{
+
     }
+
 })
